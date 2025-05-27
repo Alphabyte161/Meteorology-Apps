@@ -1,3 +1,4 @@
+# Copyright Grace Cohen 2025
 import math
 # calculates 500mb jet translational speed, be sure to use 06z and the 00z outputs
 # or else this WILL NOT work
