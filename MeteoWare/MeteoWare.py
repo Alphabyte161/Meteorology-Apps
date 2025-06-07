@@ -18,6 +18,7 @@ while True:
     print("\n[1] Heat Index Calculator")
     print("[2] DCP Calculator")
     print("[3] 500mb Jet Translational Speed Calculator")
+    print("[4] SHiP Calculator")
     menuOption = input("\nEnter number of selection (q to quit): ")
     if menuOption == "q":
         break
@@ -34,19 +35,19 @@ while True:
             elif inputRH > 85 and 80 <= T <= 87:
                 heatIndex += ((inputRH - 85) / 10) * ((87 - T) / 5)
         if heatIndex > 124:
-            print("WARNING: EXTREME HEAT DANGER!")
+            print("\nWARNING: EXTREME HEAT DANGER!")
             print(f"Heat index: {heatIndex:.0f}")
         elif heatIndex > 103:
-            print("WARNING: HEAT DANGER")
+            print("\nWARNING: HEAT DANGER")
             print(f"Heat index: {heatIndex:.0f}")
         elif heatIndex > 90:
-            print("EXTREME CAUTION")
+            print("\nEXTREME CAUTION")
             print(f"Heat index: {heatIndex:.0f}")
         elif heatIndex > 80:
-            print("CAUTION")
+            print("\nCAUTION")
             print(f"Heat index: {heatIndex:.0f}")
         else:
-            print(f"Heat index: {heatIndex:.0f}")
+            print(f"\nHeat index: {heatIndex:.0f}")
     elif menuOption == "2":
         dcape = int(input("Enter DCAPE: "))
         mucape = int(input("Enter MUCAPE: "))
@@ -58,13 +59,13 @@ while True:
         mw6km /= 16
         DCP = dcape*mucape*shear6km*mw6km
         if DCP > 3:
-            print(f"DCP: {DCP:.2f}")
+            print(f"\nDCP: {DCP:.2f}")
             print("Derecho likely")
         elif DCP > 2:
-            print(f"DCP: {DCP}")
+            print(f"\nDCP: {DCP}")
             print("Derecho possible")
         else:
-            print(f"DCP: {DCP:.2f}")
+            print(f"\nDCP: {DCP:.2f}")
             print("Derecho unlikely")
     elif menuOption == "3":
         print("\nPlease select an option for calculation by entering the number associated")
@@ -103,4 +104,24 @@ while True:
             sinLon = math.sin(delLon/2)
             coordDist = 12742 * (math.asin (math.sqrt((sinLat*sinLat) + (math.cos(lat1)) * (math.cos(lat2)) * (sinLon * sinLon))))
             spdTran = (coordDist / 18) / 1.852
-            print(f"Translational Speed: {spdTran:.2f} kts")
+            print(f"\nTranslational Speed: {spdTran:.2f} kts")
+    elif menuOption == "4":
+        mucape = int(input("Enter MUCAPE: "))
+        mumix = int(input("Enter MU parcel mixing ratio: "))
+        lapse75 = float(input("Enter 700-500mb lapse rate: "))
+        temp500 = int(input("Enter 500mb temp: "))
+        shear6km = int(input("Enter 0-6km shear in kts: "))
+        shear6km *= 0.514444
+        ship = ((mucape)*(mumix)*(lapse75)*(-temp500)*(shear6km))/44000000
+        if ship > 4:
+            print(f"\nSHiP: {ship:.2f}")
+            print("Severe hail expected")
+        elif ship > 2:
+            print(f"\nSHiP: {ship:.2f}")
+            print("Severe hail likely")
+        elif ship > 1:
+            print(f"\nSHiP: {ship:.2f}")
+            print("Severe hail possible")
+        else:
+            print(f"\nSHiP: {ship}")
+            print("Severe hail unlikely")
